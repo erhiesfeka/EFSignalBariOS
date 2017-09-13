@@ -8,7 +8,8 @@
 
 import UIKit
 
-@IBDesignable class EFSignalBarView: UIView {
+@IBDesignable
+public class EFSignalBarView: UIView {
 
     var firstSignalBarColor:UIColor = UIColor()
     var secondSignalBarColor:UIColor = UIColor()
@@ -52,7 +53,7 @@ import UIKit
     @IBInspectable var excellentSignalColor: UIColor = UIColor.green
     
     
-    override func draw(_ rect: CGRect) {
+    override public func draw(_ rect: CGRect) {
         
         
         let horizontalSpacing = bounds.width / 8
