@@ -36,3 +36,36 @@ Drag a UIView to your storyboard and change it's class to EFSignalBariOS. The vi
         
     }
   ```
+ 1. Create an outlet from the Slider View on the story board to your View controller.
+ ```swift
+ @IBOutlet weak var signalView: EFSignalBarView!
+  ```
+ 2. The signal Strength can be supplied to the signal view as follows:
+  ```swift
+ signalView.signal = EFSignalBarView.SignalStrength(rawValue: "Excellent")! //or VeryGood, or Good, or Low ...
+   ```
+ 3. You can create a function that converts to Signal Strength:
+ ```swift
+     func convertToSignalStrength(value: Float) -> String{
+        
+        if value > 0.0 && value <= 0.2 {
+            return "VeryLow"
+        }else if value > 0.2 && value <= 0.4 {
+            return "Low"
+        }else if value > 0.4 && value <= 0.6 {
+            return "Good"
+        }else if value > 0.6 && value <= 0.8 {
+            return "VeryGood"
+        }else if value > 0.8 && value <= 1 {
+            return "Excellent"
+        }else{
+            return "Unknown"
+        }
+    }
+    ```
+## Author
+
+Erhies Feka, erhiesfeka@yahoo.com
+
+## License
+EFSignalBariOS is available under the MIT license. 
