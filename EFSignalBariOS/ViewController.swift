@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         
         if value > 0.0 && value <= 0.2 {
             return "VeryLow"
-        }else if value > 0.2 && value <= 0.4 {
+        }else if value > 0.21 && value <= 0.4 {
             return "Low"
         }else if value > 0.4 && value <= 0.6 {
             return "Good"
