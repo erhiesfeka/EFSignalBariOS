@@ -6,7 +6,7 @@ An iOS 11 style Signal bar. Could be used to display Recieved Signal Strength in
 
 ## Installation
 
-SignalStrength is available through [CocoaPods](http://cocoapods.org). Deployment Target is iOS 10 or greater. To install
+EFSignalBariOS is available through [CocoaPods](http://cocoapods.org). Deployment Target is iOS 10 or greater. To install
 it, simply add the following line to your Podfile:
 
 ```ruby
