@@ -62,7 +62,7 @@ Drag a UIView to your storyboard and change it's class to EFSignalBariOS. The vi
             return "Unknown"
         }
     }
-    ```
+```
 ## Author
 
 Erhies Feka, erhiesfeka@yahoo.com
