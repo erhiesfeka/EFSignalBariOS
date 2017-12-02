@@ -22,18 +22,18 @@ class ViewController: UIViewController {
     
 
     
-    func convertToSignalStrength(value: Float) -> String{
+    func convertToSignalStrength(value: Float) -> Int{
         
         if value > 0.0 && value <= 0.3 {
-            return "VeryLow"
+            return 1
         }else if value > 0.3 && value <= 0.5 {
-            return "Low"
+            return 2
         }else if value > 0.5 && value <= 0.7 {
-            return "Good"
+            return 3
         }else if value > 0.7 && value <= 1 {
-            return "Excellent"
+            return 4
         }else{
-            return "Unknown"
+            return 0
         }
     }
     

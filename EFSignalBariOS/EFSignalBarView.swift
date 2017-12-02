@@ -10,7 +10,7 @@ import UIKit
 
 @IBDesignable
 public class EFSignalBarView: UIView {
-
+    
     var firstSignalBarColor:UIColor = UIColor()
     var secondSignalBarColor:UIColor = UIColor()
     var thirdSignalBarColor:UIColor = UIColor()
@@ -22,14 +22,13 @@ public class EFSignalBarView: UIView {
             setNeedsDisplay()
         }
     }
-    public enum SignalStrength: String {
+    @objc public enum SignalStrength: Int {
         
-        case Excellent = "Excellent"
-        case Good = "Good"
-        case Low = "Low"
-        case VeryLow = "VeryLow"
-        case Unknown = "Unknown"
-        
+        case Excellent = 4
+        case Good = 3
+        case Low = 2
+        case VeryLow = 1
+        case Unknown = 0
     }
     
     
@@ -66,7 +65,7 @@ public class EFSignalBarView: UIView {
     
     override public func draw(_ rect: CGRect) {
         
-    
+        
         switch signal {
         case .Excellent:
             
@@ -85,9 +84,9 @@ public class EFSignalBarView: UIView {
             (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor) = (baseColor, baseColor, baseColor, baseColor)
             
         }
-       
         
-        let horizontalSpacing = (bounds.width / 6) 
+        
+        let horizontalSpacing = (bounds.width / 6)
         let leadingEdge = bounds.width/15
         let secondStartPoint = CGPoint(x:horizontalSpacing*1 + leadingEdge , y: bounds.height * 0.85)
         let thirdStartPoint = CGPoint(x:horizontalSpacing*2 + leadingEdge, y: bounds.height * 0.85)
@@ -107,7 +106,8 @@ public class EFSignalBarView: UIView {
         
         let rect4 = CGRect(origin: fifthStartPoint, size: CGSize(width: rectWidth, height: bounds.height * 0.65))
         drawRect(rect: rect4, rectBgColor: fourthSignalBarColor, rectCornerRadius: horizontalSpacing/5, horizontalSpacing: horizontalSpacing)
-       
+        
     }
-
+    
 }
+
