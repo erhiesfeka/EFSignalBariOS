@@ -25,15 +25,15 @@ Drag a UIView to your storyboard and change it's class to EFSignalBariOS. The vi
 
 ### There is also a signal Strength Enum defined as follows:
 ```swift
-       public enum SignalStrength: String {
+    @objc public enum SignalStrength: Int {
         
-        case Excellent = "Excellent"
-        case Good = "Good"
-        case Low = "Low"
-        case VeryLow = "VeryLow"
-        case Unknown = "Unknown"
-        
+        case Excellent = 4
+        case Good = 3
+        case Low = 2
+        case VeryLow = 1
+        case Unknown = 0
     }
+    
   ```
  1. Create an outlet from the Slider View on the story board to your View controller.
  ```swift
@@ -41,24 +41,25 @@ Drag a UIView to your storyboard and change it's class to EFSignalBariOS. The vi
   ```
  2. The signal Strength can be supplied to the signal view as follows:
   ```swift
- signalView.signal = EFSignalBarView.SignalStrength(rawValue: "Excellent")! //or Good, or Low ...
+ signalView.signal = EFSignalBarView.SignalStrength(rawValue: 4 )! //or 3, 2, 1, 0
    ```
  3. You can create a function that converts to Signal Strength:
  ```swift
-       func convertToSignalStrength(value: Float) -> String{
+         func convertToSignalStrength(value: Float) -> Int{
         
         if value > 0.0 && value <= 0.3 {
-            return "VeryLow"
+            return 1
         }else if value > 0.3 && value <= 0.5 {
-            return "Low"
+            return 2
         }else if value > 0.5 && value <= 0.7 {
-            return "Good"
+            return 3
         }else if value > 0.7 && value <= 1 {
-            return "Excellent"
+            return 4
         }else{
-            return "Unknown"
+            return 0
         }
-      }
+    }
+
 ```
 ## Author
 
