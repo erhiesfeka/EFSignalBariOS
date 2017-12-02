@@ -15,7 +15,7 @@ public class EFSignalBarView: UIView {
     var secondSignalBarColor:UIColor = UIColor()
     var thirdSignalBarColor:UIColor = UIColor()
     var fourthSignalBarColor:UIColor = UIColor()
-    var fifthSignalBarColor:UIColor = UIColor()
+    
     
     @IBInspectable public var signal: SignalStrength = .Unknown{
         didSet {
@@ -25,7 +25,6 @@ public class EFSignalBarView: UIView {
     public enum SignalStrength: String {
         
         case Excellent = "Excellent"
-        case VeryGood = "VeryGood"
         case Good = "Good"
         case Low = "Low"
         case VeryLow = "VeryLow"
@@ -33,16 +32,28 @@ public class EFSignalBarView: UIView {
         
     }
     
-    private func drawRoundedRect(shapeLayer: CAShapeLayer, horizontalSpacing: CGFloat, signalBar:UIBezierPath, barColour: UIColor){
-        shapeLayer.removeFromSuperlayer()
-        shapeLayer.path = signalBar.cgPath
+    
+    private func drawRect(rect : CGRect, rectBgColor:UIColor, rectCornerRadius:CGFloat, horizontalSpacing: CGFloat)
+    {
+        // Size of rounded rectangle
+        let rectWidth = rect.width
+        let rectHeight = rect.height
         
-        shapeLayer.strokeColor = barColour.cgColor
-        shapeLayer.lineWidth = horizontalSpacing * 0.5
-        shapeLayer.fillColor = UIColor.blue.cgColor
-        shapeLayer.lineCap = kCALineCapRound
-        shapeLayer.removeFromSuperlayer()
-        self.layer.addSublayer(shapeLayer)
+        // Find center of actual frame to set rectangle in middle
+        let xf:CGFloat = rect.origin.x - rectWidth/2 //(self.frame.width  - rectWidth)  / 2
+        let yf:CGFloat = rect.origin.y - rectHeight//(self.frame.height - rectHeight) / 2
+        
+        let ctx: CGContext = UIGraphicsGetCurrentContext()!
+        ctx.saveGState()
+        
+        let rect = CGRect(x: xf, y: yf, width: rectWidth, height: rectHeight)
+        let clipPath: CGPath = UIBezierPath(roundedRect: rect, cornerRadius: rectCornerRadius).cgPath
+        
+        ctx.addPath(clipPath)
+        ctx.setFillColor(rectBgColor.cgColor)
+        ctx.closePath()
+        ctx.fillPath()
+        ctx.restoreGState()
         
     }
     
@@ -55,81 +66,48 @@ public class EFSignalBarView: UIView {
     
     override public func draw(_ rect: CGRect) {
         
-        
-        let horizontalSpacing = bounds.width / 8
-        let firstStartPoint = CGPoint(x:horizontalSpacing, y: bounds.height * 0.85)
-        let secondStartPoint = CGPoint(x:horizontalSpacing*2 , y: bounds.height * 0.85)
-        let thirdStartPoint = CGPoint(x:horizontalSpacing*3 , y: bounds.height * 0.85)
-        let fourthStartPoint = CGPoint(x:horizontalSpacing*4 , y: bounds.height * 0.85)
-        let fifthStartPoint = CGPoint(x:horizontalSpacing*5 , y: bounds.height * 0.85)
-        
-        
-        let verticalHeightIncrement = bounds.height
-        let firstEndPoint = CGPoint(x:horizontalSpacing, y: verticalHeightIncrement * 0.8)
-        let secondEndPoint = CGPoint(x:horizontalSpacing*2, y: verticalHeightIncrement*0.6)
-        let thirdEndPoint = CGPoint(x:horizontalSpacing*3, y: verticalHeightIncrement*0.4)
-        let fourthEndPoint = CGPoint(x:horizontalSpacing*4, y: verticalHeightIncrement*0.2)
-        let fifthEndPoint = CGPoint(x:horizontalSpacing*5, y: 0)
-        
-        let firstSignalBar = UIBezierPath()
-        let secondSignalBar = UIBezierPath()
-        let thirdSignalBar = UIBezierPath()
-        let fourthSignalBar = UIBezierPath()
-        let fifthSignalBar = UIBezierPath()
-        
-        
-        firstSignalBar.move(to: firstStartPoint)
-        firstSignalBar.addLine(to: firstEndPoint)
-        
-        secondSignalBar.move(to: secondStartPoint)
-        secondSignalBar.addLine(to: secondEndPoint)
-        
-        thirdSignalBar.move(to: thirdStartPoint)
-        thirdSignalBar.addLine(to: thirdEndPoint)
-        
-        fourthSignalBar.move(to: fourthStartPoint)
-        fourthSignalBar.addLine(to: fourthEndPoint)
-        
-        fifthSignalBar.move(to: fifthStartPoint)
-        fifthSignalBar.addLine(to: fifthEndPoint)
-        
+    
         switch signal {
         case .Excellent:
             
-            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor,fifthSignalBarColor) = (excellentSignalColor, excellentSignalColor, excellentSignalColor, excellentSignalColor, excellentSignalColor)
-            
-        case .VeryGood:
-            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor,fifthSignalBarColor) = (excellentSignalColor, excellentSignalColor, excellentSignalColor, excellentSignalColor, baseColor)
+            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor) = (excellentSignalColor, excellentSignalColor, excellentSignalColor, excellentSignalColor)
             
         case .Good:
-            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor,fifthSignalBarColor) = (moderateSignalColor, moderateSignalColor, moderateSignalColor, baseColor, baseColor)
+            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor) = (moderateSignalColor, moderateSignalColor, moderateSignalColor, baseColor)
             
         case .Low:
-            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor,fifthSignalBarColor) = (lowSignalColor, lowSignalColor, baseColor, baseColor, baseColor)
+            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor) = (lowSignalColor, lowSignalColor, baseColor, baseColor)
             
         case .VeryLow:
-            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor,fifthSignalBarColor) = (lowSignalColor, baseColor, baseColor, baseColor, baseColor)
+            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor) = (lowSignalColor, baseColor, baseColor, baseColor)
             
         case .Unknown:
-            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor,fifthSignalBarColor) = (baseColor, baseColor, baseColor, baseColor, baseColor)
+            (firstSignalBarColor, secondSignalBarColor, thirdSignalBarColor,fourthSignalBarColor) = (baseColor, baseColor, baseColor, baseColor)
             
         }
        
         
-        let shapeLayer = CAShapeLayer()
-        drawRoundedRect(shapeLayer: shapeLayer, horizontalSpacing: horizontalSpacing, signalBar: firstSignalBar, barColour: firstSignalBarColor)
+        let horizontalSpacing = (bounds.width / 6) 
+        let leadingEdge = bounds.width/15
+        let secondStartPoint = CGPoint(x:horizontalSpacing*1 + leadingEdge , y: bounds.height * 0.85)
+        let thirdStartPoint = CGPoint(x:horizontalSpacing*2 + leadingEdge, y: bounds.height * 0.85)
+        let fourthStartPoint = CGPoint(x:horizontalSpacing*3 + leadingEdge , y: bounds.height * 0.85)
+        let fifthStartPoint = CGPoint(x:horizontalSpacing*4 + leadingEdge, y: bounds.height * 0.85)
         
-        let shapeLayer2 = CAShapeLayer()
-        drawRoundedRect(shapeLayer: shapeLayer2, horizontalSpacing: horizontalSpacing, signalBar: secondSignalBar, barColour: secondSignalBarColor)
+        let rectWidth = bounds.width/8
         
-        let shapeLayer3 = CAShapeLayer()
-        drawRoundedRect(shapeLayer: shapeLayer3, horizontalSpacing: horizontalSpacing, signalBar: thirdSignalBar, barColour: thirdSignalBarColor)
+        let rect1 = CGRect(origin: secondStartPoint, size: CGSize(width: rectWidth, height: bounds.height * 0.35))
+        drawRect(rect: rect1, rectBgColor: firstSignalBarColor, rectCornerRadius: rectWidth/5, horizontalSpacing: horizontalSpacing)
         
-        let shapeLayer4 = CAShapeLayer()
-        drawRoundedRect(shapeLayer: shapeLayer4, horizontalSpacing: horizontalSpacing, signalBar: fourthSignalBar, barColour: fourthSignalBarColor)
-    
-        let shapeLayer5 = CAShapeLayer()
-        drawRoundedRect(shapeLayer: shapeLayer5, horizontalSpacing: horizontalSpacing, signalBar: fifthSignalBar, barColour: fifthSignalBarColor)
+        let rect2 = CGRect(origin: thirdStartPoint, size: CGSize(width: rectWidth, height: bounds.height * 0.45))
+        drawRect(rect: rect2, rectBgColor: secondSignalBarColor, rectCornerRadius: rectWidth/5, horizontalSpacing: horizontalSpacing)
+        
+        let rect3 = CGRect(origin: fourthStartPoint, size: CGSize(width: rectWidth, height: bounds.height * 0.55))
+        drawRect(rect: rect3, rectBgColor: thirdSignalBarColor, rectCornerRadius: rectWidth/5, horizontalSpacing: horizontalSpacing)
+        
+        let rect4 = CGRect(origin: fifthStartPoint, size: CGSize(width: rectWidth, height: bounds.height * 0.65))
+        drawRect(rect: rect4, rectBgColor: fourthSignalBarColor, rectCornerRadius: horizontalSpacing/5, horizontalSpacing: horizontalSpacing)
+       
     }
 
 }

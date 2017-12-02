@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,23 +21,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9SM-yV-veo" customClass="EFSignalBarView" customModule="EFSignalBariOS" customModuleProvider="target">
-                                <rect key="frame" x="67" y="98" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9SM-yV-veo" customClass="EFSignalBarView" customModule="EFSignalBariOS" customModuleProvider="target">
+                                <rect key="frame" x="129" y="179" width="117" height="78"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="117" id="1px-i6-jOa"/>
+                                    <constraint firstAttribute="height" constant="78" id="l61-MR-N3A"/>
+                                </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DFe-ce-z4B">
-                                <rect key="frame" x="20" y="351" width="334" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DFe-ce-z4B">
+                                <rect key="frame" x="64" y="351" width="246" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="242" id="KxE-jt-esI"/>
+                                    <constraint firstAttribute="height" constant="30" id="wjQ-iH-zBo"/>
+                                </constraints>
                                 <connections>
                                     <action selector="slider:" destination="BYZ-38-t0r" eventType="valueChanged" id="eKc-9e-brs"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f55-Ed-dfn">
-                                <rect key="frame" x="137.5" y="278" width="100" height="36"/>
+                                <rect key="frame" x="137" y="281" width="100" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="1IV-v8-DBO"/>
-                                    <constraint firstAttribute="height" constant="36" id="V4d-Ig-ghe"/>
+                                    <constraint firstAttribute="width" constant="100" id="jsl-5m-A5M"/>
+                                    <constraint firstAttribute="height" constant="36" id="kgD-1Y-9uy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -46,8 +52,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="f55-Ed-dfn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IRw-ru-Pkv"/>
-                            <constraint firstItem="f55-Ed-dfn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="258" id="Lqm-Mf-RdA"/>
+                            <constraint firstItem="9SM-yV-veo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0zQ-U8-eU8"/>
+                            <constraint firstItem="DFe-ce-z4B" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IOY-7B-kdt"/>
+                            <constraint firstItem="f55-Ed-dfn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vsd-pc-zh7"/>
+                            <constraint firstItem="f55-Ed-dfn" firstAttribute="top" secondItem="9SM-yV-veo" secondAttribute="bottom" constant="24" id="Y3i-A7-yK5"/>
+                            <constraint firstItem="9SM-yV-veo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="159" id="g07-2l-RzJ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DFe-ce-z4B" secondAttribute="bottom" constant="286" id="q5A-En-ukB"/>
                         </constraints>
                     </view>
                     <connections>
