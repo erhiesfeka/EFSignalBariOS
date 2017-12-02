@@ -2,7 +2,7 @@
 An iOS 11 style Signal bar. Could be used to display Recieved Signal Strength in applications
 
 ## Preview
-![alt tag](https://media.giphy.com/media/YxTSAbwiRGzG8/giphy.gif)
+![alt tag](https://media.giphy.com/media/xUOxfkAdGpvH28fIpW/giphy.gif)
 
 ## Installation
 
@@ -25,10 +25,9 @@ Drag a UIView to your storyboard and change it's class to EFSignalBariOS. The vi
 
 ### There is also a signal Strength Enum defined as follows:
 ```swift
-  public enum SignalStrength: String {
+       public enum SignalStrength: String {
         
         case Excellent = "Excellent"
-        case VeryGood = "VeryGood"
         case Good = "Good"
         case Low = "Low"
         case VeryLow = "VeryLow"
@@ -42,26 +41,24 @@ Drag a UIView to your storyboard and change it's class to EFSignalBariOS. The vi
   ```
  2. The signal Strength can be supplied to the signal view as follows:
   ```swift
- signalView.signal = EFSignalBarView.SignalStrength(rawValue: "Excellent")! //or VeryGood, or Good, or Low ...
+ signalView.signal = EFSignalBarView.SignalStrength(rawValue: "Excellent")! //or Good, or Low ...
    ```
  3. You can create a function that converts to Signal Strength:
  ```swift
-     func convertToSignalStrength(value: Float) -> String{
+       func convertToSignalStrength(value: Float) -> String{
         
-        if value > 0.0 && value <= 0.2 {
+        if value > 0.0 && value <= 0.3 {
             return "VeryLow"
-        }else if value > 0.2 && value <= 0.4 {
+        }else if value > 0.3 && value <= 0.5 {
             return "Low"
-        }else if value > 0.4 && value <= 0.6 {
+        }else if value > 0.5 && value <= 0.7 {
             return "Good"
-        }else if value > 0.6 && value <= 0.8 {
-            return "VeryGood"
-        }else if value > 0.8 && value <= 1 {
+        }else if value > 0.7 && value <= 1 {
             return "Excellent"
         }else{
             return "Unknown"
         }
-    }
+      }
 ```
 ## Author
 
