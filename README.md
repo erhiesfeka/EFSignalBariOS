@@ -1,5 +1,5 @@
 # EFSignalBariOS
-An iOS 11 style Signal bar. Could be used to display Recieved Signal Strength in applications
+A recieved signal strength indicator view, inpired by iOS 11 cellular signal indicator
 
 ## Preview
 ![alt tag](https://media.giphy.com/media/xUOxfkAdGpvH28fIpW/giphy.gif)
